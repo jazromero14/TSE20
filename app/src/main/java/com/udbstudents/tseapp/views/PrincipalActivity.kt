@@ -98,6 +98,7 @@ class PrincipalActivity : AppCompatActivity() {
         val searchItem = menu.findItem(R.id.action_search)
         val searchView: SearchView = searchItem.actionView as SearchView
         searchView.imeOptions = EditorInfo.IME_ACTION_DONE;
+        searchView.setQueryHint(getText(R.string.hint_search));
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
