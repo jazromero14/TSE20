@@ -3,13 +3,26 @@ package com.udbstudents.tseapp.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.udbstudents.tseapp.R
 import com.udbstudents.tseapp.models.ActaAndMunicipio
+import java.util.*
+import kotlin.collections.ArrayList
 
-class MyAdapter(private val events: List<ActaAndMunicipio>) :
+class MyAdapter(private val events: MutableList<ActaAndMunicipio>) :
+
+
+
+
+
     RecyclerView.Adapter<MyAdapter.ViewHolder>() {
+
+    private var emptyList : MutableList<ActaAndMunicipio> = mutableListOf()
+    private var emptylistFull: MutableList<ActaAndMunicipio> = mutableListOf()
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyAdapter.ViewHolder {
         return ViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_event, parent, false)
@@ -20,6 +33,39 @@ class MyAdapter(private val events: List<ActaAndMunicipio>) :
         return events.size
     }
 
+    fun getFilter(): Filter? {
+        return exampleFilter
+    }
+
+    private val exampleFilter: Filter = object : Filter() {
+        override fun performFiltering(constraint: CharSequence): FilterResults {
+            val filteredList: MutableList<ActaAndMunicipio> = ArrayList()
+            if (constraint == null || constraint.length == 0) {
+                filteredList.addAll(emptylistFull)
+            } else {
+                val filterPattern =
+                    constraint.toString().toLowerCase(Locale.ROOT).trim { it <= ' ' }
+                for (item in emptylistFull) {
+                    if (item.municipio.nombre!!.toLowerCase(Locale.ROOT).contains(filterPattern)) {
+                        filteredList.add(item)
+                    }
+                }
+            }
+            val results = FilterResults()
+            results.values = filteredList
+            return results
+        }
+
+        override fun publishResults(
+            constraint: CharSequence,
+            results: FilterResults
+        ) {
+
+            events.clear()
+            events.addAll(results.values as MutableList<ActaAndMunicipio>)
+            notifyDataSetChanged()
+        }
+    }
     override fun onBindViewHolder(holder: MyAdapter.ViewHolder, position: Int) {
         val event = events[position]
 
