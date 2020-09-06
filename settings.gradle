@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name = "TSE APP"
+rootProject.name = "TSE App"

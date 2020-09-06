@@ -26,6 +26,44 @@
             app:layout_constraintStart_toStartOf="@id/btn_login"
             app:layout_constraintTop_toTopOf="@+id/btn_login" />
 
+        <LinearLayout
+            android:id="@+id/title_app"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_129sdp"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/guideline">
+
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="8dp"
+                android:text="@string/tse"
+                android:gravity="center"
+                android:textColor="#fff"
+                android:textSize="@dimen/_48sdp"
+                android:fontFamily="@font/caviar_dream"
+                android:textStyle="bold" />
+            <View
+                android:id="@+id/view_gallery"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="20dp"
+                android:background="#A3A3A3"/>
+
+
+
+        </LinearLayout>
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -50,7 +88,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:backgroundTint="#FFFFFF"
-                android:drawableStart="@drawable/ic_person"
+                android:drawableStart="@drawable/ic_email"
                 android:drawablePadding="12dp"
                 android:hint="@string/email"
                 android:imeOptions="actionNext"
@@ -85,7 +123,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#FFFFFF"
-                android:drawableStart="@drawable/key"
+                android:drawableStart="@drawable/ic_key"
                 android:drawablePadding="12dp"
                 android:hint="@string/password"
                 android:imeOptions="actionDone"

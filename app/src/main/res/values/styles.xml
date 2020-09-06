@@ -1,13 +1,18 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">#038C7F</item>
+        <item name="colorPrimaryDark">#026057</item>
+        <item name="colorAccent">#314FF6</item>
     </style>
-
     <style name="TextErrorMessages" parent="@android:style/TextAppearance">
         <item name="android:textColor">@android:color/white</item>
     </style>
+
+    <style name="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
 </resources>

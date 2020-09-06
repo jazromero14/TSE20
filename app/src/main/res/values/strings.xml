@@ -1,13 +1,21 @@
 <resources>
-    <string name="app_name">TSE APP</string>
-    <string name="name">Nombre</string>
-    <string name="user">Usuario</string>
+    <string name="app_name">TSE App</string>
+    <string name="tse">"TSE "</string>
+    <string name="email">Correo electronico</string>
     <string name="password">Contraseña</string>
+    <string name="login">Iniciar sesión</string>
+    <string name="name">Nombre</string>
+    <string name="surname">Apellido</string>
     <string name="confirm_password">Repetir contraseña</string>
     <string name="sign_up">Registrarse</string>
-    <string name="email">Usuario</string>
-    <string name="login">Inicia Sesión</string>
-    <string name="actas">Actas</string>
-    <string name="action_settings">Buscar</string>
-    <string name="logout">Cerrar sesion</string>
+    <string name="warning">Advertencia</string>
+    <string name="accept_btn">Ok</string>
+    <string name="details_message">Detalle:</string>
+    <string name="warning_message">¡Algo a salido mal, intentalo de nuevo!</string>
+    <string name="no_match_pass">Contraseñas no coinciden</string>
+    <string name="no_regex_matches">La contraseña debe ser de 8 caracteres, alfanumérica y al menos una mayúscula y un carácter especial</string>
+    <string name="user_exists">El correo ya está siendo usado por otra cuenta</string>
+    <string name="message_error_login">Hubo un error al iniciar sesión, inténtelo de nuevo</string>
+    <string name="empty_fields">Campos vacíos</string>
+    <string name="categorias">Actas</string>
 </resources>

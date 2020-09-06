@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "165334897790",
+    "firebase_url": "https://tse-app-74367.firebaseio.com",
+    "project_id": "tse-app-74367",
+    "storage_bucket": "tse-app-74367.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:165334897790:android:5d30868655a1112d30742f",
+        "android_client_info": {
+          "package_name": "com.udbstudents.tseapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "165334897790-4ef44jh15ajnqu6jbui3r7as9qkp0usb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.udbstudents.tseapp",
+            "certificate_hash": "5bdd460a75e79ce202aca6bcfd25f1fd796a3392"
+          }
+        },
+        {
+          "client_id": "165334897790-r7d80cdpln4hmoktpvefnetlt022uf5i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCj-hqu9ZS-cL9Zkz9x-G8pAQ_P_NrEMbk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "165334897790-r7d80cdpln4hmoktpvefnetlt022uf5i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
