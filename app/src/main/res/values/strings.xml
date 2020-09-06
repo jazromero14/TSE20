@@ -18,4 +18,7 @@
     <string name="message_error_login">Hubo un error al iniciar sesión, inténtelo de nuevo</string>
     <string name="empty_fields">Campos vacíos</string>
     <string name="categorias">Actas</string>
+    <string name="update">Actualizar</string>
+    <string name="log_out">Cerrar Sesion</string>
+    <string name="consolidado">Consolidados de actas</string>
 </resources>

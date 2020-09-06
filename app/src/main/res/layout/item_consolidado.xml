@@ -16,24 +16,24 @@
         android:padding="@dimen/_16sdp">
 
         <TextView
-            android:id="@+id/event_title_txt"
+            android:id="@+id/title_txt"
             style="@style/TextAppearance.MaterialComponents.Headline5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Acta  Nº"
+            android:text="Departamento"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/event_index_txt"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/event_index_txt"
+            android:id="@+id/event_total"
             style="@style/TextAppearance.MaterialComponents.Headline5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Titulo"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/event_title_txt"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title_txt" />
 
         <TextView
             android:id="@+id/municipioitem"
@@ -43,7 +43,7 @@
             android:text="Municipio"
             app:layout_constraintEnd_toStartOf="@id/municipioName"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/event_title_txt" />
+            app:layout_constraintTop_toBottomOf="@id/event_total" />
 
         <TextView
             android:id="@+id/municipioName"
@@ -53,7 +53,7 @@
             android:text="Horario"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/municipioitem"
-            app:layout_constraintTop_toBottomOf="@id/event_title_txt" />
+            app:layout_constraintTop_toBottomOf="@id/event_total" />
 
 
         <TextView
