@@ -32,14 +32,19 @@ class PrincipalActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_second )
+        setContentView(R.layout.activity_principal )
         setSupportActionBar(mainToolbar)
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
 
         mAuth = FirebaseAuth.getInstance()
         mFirestore = FirebaseFirestore.getInstance()
 
+        inflateContent()
+        refreshList()
 
+    }
+
+    private fun inflateContent(){
         mFirestore.collection("Municipios").get()
             .addOnCompleteListener {
                 if (it.isSuccessful) {
@@ -96,15 +101,26 @@ class PrincipalActivity : AppCompatActivity() {
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
+                (viewAdapter as MyAdapter).getFilter()?.filter(query)
                 return false
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                (viewAdapter as MyAdapter).getFilter()?.filter(newText)
+               // (viewAdapter as MyAdapter).getFilter()?.filter(newText)
                 return false
             }
         })
         return true
+    }
+
+
+    private fun refreshList(){
+        swipe_refresh.setOnRefreshListener {
+            listaActasRecyclerView.clear()
+            inflateContent()
+            swipe_refresh.isRefreshing = false
+        }
+        swipe_refresh.isRefreshing = false
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
