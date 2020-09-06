@@ -7,15 +7,10 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.udbstudents.tseapp.R
-import com.udbstudents.tseapp.adapters.MyAdapter
-import com.udbstudents.tseapp.models.ActaAndMunicipio
-import com.udbstudents.tseapp.models.Actas
-import com.udbstudents.tseapp.models.Municipio
-import com.udbstudents.tseapp.models.TokenUser
+import com.udbstudents.tseapp.models.Departamento
 import kotlinx.android.synthetic.main.activity_principal.*
 
 class PrincipalActivity : AppCompatActivity() {
@@ -23,6 +18,8 @@ class PrincipalActivity : AppCompatActivity() {
 
     private lateinit var mFirestore: FirebaseFirestore
     private lateinit var mAuth: FirebaseAuth
+
+    private var departamentoLista: MutableList<Departamento> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +30,16 @@ class PrincipalActivity : AppCompatActivity() {
         mAuth = FirebaseAuth.getInstance()
         mFirestore = FirebaseFirestore.getInstance()
 
+        mFirestore.collection("Departamentos").get()
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    val departamento = it.result!!.toObjects(Departamento::class.java)
+                    departamento.forEach { item ->
+                        departamentoLista.add(item)
+                    }
+                }
+                departamentoLista
+            }
     }
 
 
