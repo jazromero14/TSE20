@@ -12,15 +12,14 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class MyAdapter(private val events: MutableList<ActaAndMunicipio>) :
-
-
-
-
-
     RecyclerView.Adapter<MyAdapter.ViewHolder>() {
 
     private var emptyList : MutableList<ActaAndMunicipio> = mutableListOf()
     private var emptylistFull: MutableList<ActaAndMunicipio> = mutableListOf()
+    fun ExampleAdapter(exampleList: MutableList<ActaAndMunicipio>) {
+        emptyList = exampleList
+        emptylistFull = ArrayList(exampleList)
+    }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyAdapter.ViewHolder {
@@ -39,7 +38,7 @@ class MyAdapter(private val events: MutableList<ActaAndMunicipio>) :
 
     private val exampleFilter: Filter = object : Filter() {
         override fun performFiltering(constraint: CharSequence): FilterResults {
-            val filteredList: MutableList<ActaAndMunicipio> = ArrayList()
+            val filteredList: MutableList<ActaAndMunicipio> = mutableListOf()
             if (constraint == null || constraint.length == 0) {
                 filteredList.addAll(emptylistFull)
             } else {
@@ -61,8 +60,8 @@ class MyAdapter(private val events: MutableList<ActaAndMunicipio>) :
             results: FilterResults
         ) {
 
-            events.clear()
-            events.addAll(results.values as MutableList<ActaAndMunicipio>)
+            emptyList.clear()
+            emptyList.addAll(results.values as MutableList<ActaAndMunicipio>)
             notifyDataSetChanged()
         }
     }

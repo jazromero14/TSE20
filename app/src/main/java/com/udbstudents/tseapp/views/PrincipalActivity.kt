@@ -40,7 +40,7 @@ class PrincipalActivity : AppCompatActivity() {
         mFirestore = FirebaseFirestore.getInstance()
 
         inflateContent()
-        refreshList()
+    /*    refreshList()*/
 
     }
 
@@ -103,26 +103,27 @@ class PrincipalActivity : AppCompatActivity() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 (viewAdapter as MyAdapter).getFilter()?.filter(query)
-                return false
+                return true
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-               // (viewAdapter as MyAdapter).getFilter()?.filter(newText)
-                return false
+
+               (viewAdapter as MyAdapter).getFilter()?.filter(newText)
+                return true
             }
         })
         return true
     }
 
 
-    private fun refreshList(){
+  /*  private fun refreshList(){
         swipe_refresh.setOnRefreshListener {
             listaActasRecyclerView.clear()
             inflateContent()
             swipe_refresh.isRefreshing = false
         }
         swipe_refresh.isRefreshing = false
-    }
+    }*/
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
