@@ -23,6 +23,7 @@ class MyAdapter(private val events: List<ActaAndMunicipio>) :
     override fun onBindViewHolder(holder: MyAdapter.ViewHolder, position: Int) {
         val event = events[position]
 
+        holder.actaIndice.text =event.actaIndece.toString()
         holder.municipioName.text = event.municipio.nombre
         holder.partidoUno.text = event.acta.idPartido_uno
         holder.partidodos.text = event.acta.idPartido_dos
@@ -35,6 +36,7 @@ class MyAdapter(private val events: List<ActaAndMunicipio>) :
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val actaIndice = view.findViewById<TextView>(R.id.event_index_txt)
         val municipioName = view.findViewById<TextView>(R.id.municipioName)
         val partidoUno = view.findViewById<TextView>(R.id.partidounoitem)
         val partidodos = view.findViewById<TextView>(R.id.partidoDositem)
