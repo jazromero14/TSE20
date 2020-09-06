@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">TSE APP</string>
+    <string name="name">Nombre</string>
+    <string name="user">Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="confirm_password">Repetir contraseña</string>
+    <string name="sign_up">Registrarse</string>
+    <string name="email">Usuario</string>
+    <string name="login">Inicia Sesión</string>
+    <string name="actas">Actas</string>
+    <string name="action_settings">Buscar</string>
+    <string name="logout">Cerrar sesion</string>
+</resources>
