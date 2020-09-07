@@ -22,4 +22,5 @@
     <string name="log_out">Cerrar Sesion</string>
     <string name="consolidado">Consolidados de actas</string>
     <string name="hint_search">Buscar</string>
+    <string name="todas_las_actas">Todas las Actas</string>
 </resources>

@@ -49,8 +49,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:text="@string/categorias"
-                android:textSize="@dimen/_16sdp"
-                android:textStyle="normal"
+            android:textStyle="bold"
+                android:textSize="@dimen/_18sdp"
+                android:gravity="center"
                 android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -109,7 +110,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_4sdp"
-                android:text="Municipio"
+                android:text="Partidos"
                 app:layout_constraintEnd_toStartOf="@id/municipioName"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/event_total" />
@@ -119,7 +120,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_4sdp"
-                android:text="Horario"
+                android:text="Total votos"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/municipioitem"
                 app:layout_constraintTop_toBottomOf="@id/event_total" />
@@ -211,6 +212,22 @@
 
             </androidx.cardview.widget.CardView>
 
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/todaslasactas"
+                android:text="@string/todas_las_actas"
+                android:textStyle="bold"
+                android:textSize="@dimen/_18sdp"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:layout_marginEnd="@dimen/_16sdp"
+                android:layout_marginStart="@dimen/_16sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/consolidadoCard"/>
+
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/my_recycler_view"
                 android:layout_width="match_parent"
@@ -222,7 +239,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/consolidadoCard" />
+                app:layout_constraintTop_toBottomOf="@id/todaslasactas" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

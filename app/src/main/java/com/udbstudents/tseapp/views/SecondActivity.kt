@@ -144,7 +144,7 @@ class SecondActivity : AppCompatActivity() {
                                 val actaIndex = actasModel.indexOf(acta)
                                 val actaAndMunicipio = ActaAndMunicipio(actaIndex, acta, municipio)
                                 listaActasRecyclerView.add(actaAndMunicipio)
-                                actasTotal = listaActasRecyclerView.size.toString()
+                                actasTotal = "Actas procesadas: " + listaActasRecyclerView.size.toString()
 
 
                                 //sacando nombres de partidos de DB
