@@ -10,6 +10,7 @@ import android.view.WindowManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
@@ -33,6 +34,9 @@ class SecondActivity : AppCompatActivity() {
     private var listVotosTres : MutableList<Partido> = mutableListOf()
     private var listVotosCuatro : MutableList<Partido> = mutableListOf()
     private lateinit var municipioSelected : String
+    private lateinit var actasTotal : String
+    private lateinit var event_total: TextView
+
 
     private lateinit var spinnerMunicipio : Spinner
 
@@ -42,6 +46,8 @@ class SecondActivity : AppCompatActivity() {
         setSupportActionBar(mainToolbar)
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
 
+        event_total = findViewById<TextView>(R.id.event_total)
+        actasTotal = ""
         mAuth = FirebaseAuth.getInstance()
         mFirestore = FirebaseFirestore.getInstance()
 
@@ -106,6 +112,8 @@ class SecondActivity : AppCompatActivity() {
                                 val actaIndex = actasModel.indexOf(acta)
                                 val actaAndMunicipio = ActaAndMunicipio(actaIndex, acta, municipio)
                                 listaActasRecyclerView.add(actaAndMunicipio)
+                                actasTotal = listaActasRecyclerView.size.toString()
+                                event_total.text = actasTotal
                                 val partidoUno = Partido( actaAndMunicipio.acta.votos_partUno)
                                 val partidoDos = Partido(actaAndMunicipio.acta.votos_partDos)
                                 val partidoTres = Partido(actaAndMunicipio.acta.votos_partTres)
