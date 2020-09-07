@@ -53,10 +53,10 @@ class SecondActivity : AppCompatActivity() {
 
         event_total = findViewById<TextView>(R.id.event_total)
 
-        editPatidoUnoName = findViewById<TextView>(R.id.partidounoName)
-        editPatidoDosName = findViewById<TextView>(R.id.partidoDosName)
-        editPatidoTresName = findViewById<TextView>(R.id.partidoTresName)
-        editPatidoCuatroName = findViewById<TextView>(R.id.partidoCuatroName)
+        editPatidoUnoName = findViewById<TextView>(R.id.partidounoitem)
+        editPatidoDosName = findViewById<TextView>(R.id.partidoDositem)
+        editPatidoTresName = findViewById<TextView>(R.id.partidoTresitem)
+        editPatidoCuatroName = findViewById<TextView>(R.id.partidoCuatroitem)
         actasTotal = ""
         mAuth = FirebaseAuth.getInstance()
         mFirestore = FirebaseFirestore.getInstance()
@@ -123,15 +123,20 @@ class SecondActivity : AppCompatActivity() {
                                 val actaAndMunicipio = ActaAndMunicipio(actaIndex, acta, municipio)
                                 listaActasRecyclerView.add(actaAndMunicipio)
                                 actasTotal = listaActasRecyclerView.size.toString()
+
+                                //sacando nombres de partidos de DB
+
                                 val partOneName = actaAndMunicipio.acta.idPartido_uno
-                                val partTwoName = actaAndMunicipio.acta.idPartido_uno
-                                val partThreeName = actaAndMunicipio.acta.idPartido_uno
-                                val partFourName = actaAndMunicipio.acta.idPartido_uno
+                                val partTwoName = actaAndMunicipio.acta.idPartido_dos
+                                val partThreeName = actaAndMunicipio.acta.idPartido_tres
+                                val partFourName = actaAndMunicipio.acta.idPartido_tres
                                 editPatidoUnoName.text = partOneName
                                 editPatidoDosName.text = partTwoName
                                 editPatidoTresName.text = partThreeName
                                 editPatidoCuatroName.text = partFourName
                                 event_total.text = actasTotal
+
+                                //sacando votos de cada partido de DB
                                 val partidoUno = Partido( actaAndMunicipio.acta.votos_partUno)
                                 val partidoDos = Partido(actaAndMunicipio.acta.votos_partDos)
                                 val partidoTres = Partido(actaAndMunicipio.acta.votos_partTres)
@@ -157,7 +162,7 @@ class SecondActivity : AppCompatActivity() {
 
         for (partido in listVotosUno){
             val votoUno = partido.votos
-            val sumaVotosUno =+votoUno!!
+            val sumaVotosUno =  votoUno!! + votoUno!!
             val totalvotosUno = sumaVotosUno
 
         }
