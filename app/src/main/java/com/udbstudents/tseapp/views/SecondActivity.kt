@@ -16,10 +16,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.udbstudents.tseapp.R
 import com.udbstudents.tseapp.adapters.MyAdapter
-import com.udbstudents.tseapp.models.ActaAndMunicipio
-import com.udbstudents.tseapp.models.Actas
-import com.udbstudents.tseapp.models.Municipio
-import com.udbstudents.tseapp.models.TokenUser
+import com.udbstudents.tseapp.models.*
 import kotlinx.android.synthetic.main.activity_principal.*
 import java.util.ArrayList
 
@@ -31,6 +28,10 @@ class SecondActivity : AppCompatActivity() {
     private lateinit var mAuth: FirebaseAuth
     private var municipiosLista: MutableList<Municipio> = mutableListOf()
     private var listaActasRecyclerView: MutableList<ActaAndMunicipio> = mutableListOf()
+    private var listVotosUno : MutableList<Partido> = mutableListOf()
+    private var listVotosDos : MutableList<Partido> = mutableListOf()
+    private var listVotosTres : MutableList<Partido> = mutableListOf()
+    private var listVotosCuatro : MutableList<Partido> = mutableListOf()
     private lateinit var municipioSelected : String
 
     private lateinit var spinnerMunicipio : Spinner
@@ -105,6 +106,15 @@ class SecondActivity : AppCompatActivity() {
                                 val actaIndex = actasModel.indexOf(acta)
                                 val actaAndMunicipio = ActaAndMunicipio(actaIndex, acta, municipio)
                                 listaActasRecyclerView.add(actaAndMunicipio)
+                                val partidoUno = Partido( actaAndMunicipio.acta.votos_partUno)
+                                val partidoDos = Partido(actaAndMunicipio.acta.votos_partDos)
+                                val partidoTres = Partido(actaAndMunicipio.acta.votos_partTres)
+                                val partidoCuatro = Partido(actaAndMunicipio.acta.votos_partCuatro)
+                                listVotosUno.add(partidoUno)
+                                listVotosDos.add(partidoDos)
+                                listVotosTres.add(partidoTres)
+                                listVotosCuatro.add(partidoCuatro)
+                                getallVostos(listVotosUno, listVotosDos, listVotosTres, listVotosCuatro)
 
                             }
                         }
@@ -115,6 +125,16 @@ class SecondActivity : AppCompatActivity() {
                     Log.e("NO FUNCIONA", "")
                 }
             }
+    }
+
+    private fun getallVostos(listVotosUno: MutableList<Partido>, listVotosDos: MutableList<Partido>, listVotosTres: MutableList<Partido>, listVotosCuatro: MutableList<Partido>) {
+
+        for (partido in listVotosUno){
+            val votoUno = partido.votos
+            val sumaVotosUno =+votoUno!!
+            
+
+        }
     }
 
     private fun inflateRecyclerView(list: MutableList<ActaAndMunicipio>) {
