@@ -112,6 +112,7 @@ class SecondActivity : AppCompatActivity() {
 
     private fun getAllActas(municipios: MutableList<Municipio>, idMunicipioSelected : String) {
         listaActasRecyclerView.clear()
+        listVotosUno.clear()
         mFirestore.collection("Actas").whereEqualTo("idMunicipio", idMunicipioSelected).get()
             .addOnCompleteListener {
                 if (it.isSuccessful) {
@@ -161,8 +162,8 @@ class SecondActivity : AppCompatActivity() {
     private fun getallVostos(listVotosUno: MutableList<Partido>, listVotosDos: MutableList<Partido>, listVotosTres: MutableList<Partido>, listVotosCuatro: MutableList<Partido>) {
 
         for (partido in listVotosUno){
-            val votoUno = partido.votos
-            val sumaVotosUno =  votoUno!! + votoUno!!
+            val votoUno =+partido.votos!!
+            val sumaVotosUno =  votoUno!!
             val totalvotosUno = sumaVotosUno
 
         }
