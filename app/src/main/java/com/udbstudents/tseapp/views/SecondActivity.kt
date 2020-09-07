@@ -17,9 +17,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.udbstudents.tseapp.R
 import com.udbstudents.tseapp.adapters.MyAdapter
-import com.udbstudents.tseapp.models.*
+import com.udbstudents.tseapp.models.ActaAndMunicipio
+import com.udbstudents.tseapp.models.Actas
+import com.udbstudents.tseapp.models.Municipio
+import com.udbstudents.tseapp.models.Partido
 import kotlinx.android.synthetic.main.activity_principal.*
-import java.util.ArrayList
 
 class SecondActivity : AppCompatActivity() {
 
@@ -47,7 +49,7 @@ class SecondActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_second )
+        setContentView(R.layout.activity_second)
         setSupportActionBar(mainToolbar)
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
 
@@ -110,7 +112,7 @@ class SecondActivity : AppCompatActivity() {
     }
 
 
-    private fun getAllActas(municipios: MutableList<Municipio>, idMunicipioSelected : String) {
+    private fun getAllActas(municipios: MutableList<Municipio>, idMunicipioSelected: String) {
         listaActasRecyclerView.clear()
         listVotosUno.clear()
         mFirestore.collection("Actas").whereEqualTo("idMunicipio", idMunicipioSelected).get()
@@ -130,7 +132,7 @@ class SecondActivity : AppCompatActivity() {
                                 val partOneName = actaAndMunicipio.acta.idPartido_uno
                                 val partTwoName = actaAndMunicipio.acta.idPartido_dos
                                 val partThreeName = actaAndMunicipio.acta.idPartido_tres
-                                val partFourName = actaAndMunicipio.acta.idPartido_tres
+                                val partFourName = actaAndMunicipio.acta.idPartido_cuatro
                                 editPatidoUnoName.text = partOneName
                                 editPatidoDosName.text = partTwoName
                                 editPatidoTresName.text = partThreeName
@@ -138,7 +140,7 @@ class SecondActivity : AppCompatActivity() {
                                 event_total.text = actasTotal
 
                                 //sacando votos de cada partido de DB
-                                val partidoUno = Partido( actaAndMunicipio.acta.votos_partUno)
+                                val partidoUno = Partido(actaAndMunicipio.acta.votos_partUno)
                                 val partidoDos = Partido(actaAndMunicipio.acta.votos_partDos)
                                 val partidoTres = Partido(actaAndMunicipio.acta.votos_partTres)
                                 val partidoCuatro = Partido(actaAndMunicipio.acta.votos_partCuatro)
@@ -146,7 +148,12 @@ class SecondActivity : AppCompatActivity() {
                                 listVotosDos.add(partidoDos)
                                 listVotosTres.add(partidoTres)
                                 listVotosCuatro.add(partidoCuatro)
-                                getallVostos(listVotosUno, listVotosDos, listVotosTres, listVotosCuatro)
+                                getallVostos(
+                                    listVotosUno,
+                                    listVotosDos,
+                                    listVotosTres,
+                                    listVotosCuatro
+                                )
 
                             }
                         }
@@ -159,13 +166,22 @@ class SecondActivity : AppCompatActivity() {
             }
     }
 
-    private fun getallVostos(listVotosUno: MutableList<Partido>, listVotosDos: MutableList<Partido>, listVotosTres: MutableList<Partido>, listVotosCuatro: MutableList<Partido>) {
+    private fun getallVostos(
+        listVotosUno: MutableList<Partido>,
+        listVotosDos: MutableList<Partido>,
+        listVotosTres: MutableList<Partido>,
+        listVotosCuatro: MutableList<Partido>
+    ) {
 
         for (partido in listVotosUno){
             val votoUno =+partido.votos!!
             val sumaVotosUno =  votoUno!!
             val totalvotosUno = sumaVotosUno
 
+        }
+        for (partido in listVotosUno) {
+            var precioTotal = 0
+             precioTotal += partido.votos!!
         }
     }
 
