@@ -128,6 +128,7 @@ class SecondActivity : AppCompatActivity() {
                                 listaActasRecyclerView.add(actaAndMunicipio)
                                 actasTotal = listaActasRecyclerView.size.toString()
 
+
                                 //sacando nombres de partidos de DB
 
                                 val partOneName = actaAndMunicipio.acta.idPartido_uno
@@ -173,19 +174,11 @@ class SecondActivity : AppCompatActivity() {
         listVoTres: MutableList<Partido>,
         listVoCuatro: MutableList<Partido>
     ) {
-
-        for (partido in listVoUno){
-            val votoUno =+partido.votos!!
-            val sumaVotosUno =  votoUno!!
-
-
-        }
+        precioTotal = 0
         for (partido in listVoUno) {
 
              precioTotal += partido.votos!!
-
         }
-
         val totalvotosUno = precioTotal
     }
 
