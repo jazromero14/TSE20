@@ -36,6 +36,11 @@ class SecondActivity : AppCompatActivity() {
     private lateinit var municipioSelected : String
     private lateinit var actasTotal : String
     private lateinit var event_total: TextView
+    private lateinit var  editPatidoUnoName: TextView
+    private lateinit var  editPatidoDosName: TextView
+    private lateinit var  editPatidoTresName: TextView
+    private lateinit var  editPatidoCuatroName: TextView
+
 
 
     private lateinit var spinnerMunicipio : Spinner
@@ -47,6 +52,11 @@ class SecondActivity : AppCompatActivity() {
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
 
         event_total = findViewById<TextView>(R.id.event_total)
+
+        editPatidoUnoName = findViewById<TextView>(R.id.partidounoName)
+        editPatidoDosName = findViewById<TextView>(R.id.partidoDosName)
+        editPatidoTresName = findViewById<TextView>(R.id.partidoTresName)
+        editPatidoCuatroName = findViewById<TextView>(R.id.partidoCuatroName)
         actasTotal = ""
         mAuth = FirebaseAuth.getInstance()
         mFirestore = FirebaseFirestore.getInstance()
@@ -113,6 +123,14 @@ class SecondActivity : AppCompatActivity() {
                                 val actaAndMunicipio = ActaAndMunicipio(actaIndex, acta, municipio)
                                 listaActasRecyclerView.add(actaAndMunicipio)
                                 actasTotal = listaActasRecyclerView.size.toString()
+                                val partOneName = actaAndMunicipio.acta.idPartido_uno
+                                val partTwoName = actaAndMunicipio.acta.idPartido_uno
+                                val partThreeName = actaAndMunicipio.acta.idPartido_uno
+                                val partFourName = actaAndMunicipio.acta.idPartido_uno
+                                editPatidoUnoName.text = partOneName
+                                editPatidoDosName.text = partTwoName
+                                editPatidoTresName.text = partThreeName
+                                editPatidoCuatroName.text = partFourName
                                 event_total.text = actasTotal
                                 val partidoUno = Partido( actaAndMunicipio.acta.votos_partUno)
                                 val partidoDos = Partido(actaAndMunicipio.acta.votos_partDos)
@@ -140,7 +158,7 @@ class SecondActivity : AppCompatActivity() {
         for (partido in listVotosUno){
             val votoUno = partido.votos
             val sumaVotosUno =+votoUno!!
-            
+            val totalvotosUno = sumaVotosUno
 
         }
     }
