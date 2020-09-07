@@ -42,7 +42,7 @@ class SecondActivity : AppCompatActivity() {
     private lateinit var  editPatidoDosName: TextView
     private lateinit var  editPatidoTresName: TextView
     private lateinit var  editPatidoCuatroName: TextView
-
+    private var precioTotal : Int = 0
 
 
     private lateinit var spinnerMunicipio : Spinner
@@ -176,14 +176,16 @@ class SecondActivity : AppCompatActivity() {
         for (partido in listVoUno){
             val votoUno =+partido.votos!!
             val sumaVotosUno =  votoUno!!
-            val totalvotosUno = sumaVotosUno
 
 
         }
         for (partido in listVotosUno) {
-            var precioTotal = 0
+
              precioTotal += partido.votos!!
+
         }
+
+        val totalvotosUno = precioTotal
     }
 
     private fun inflateRecyclerView(list: MutableList<ActaAndMunicipio>) {
