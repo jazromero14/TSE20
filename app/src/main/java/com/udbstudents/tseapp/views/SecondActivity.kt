@@ -255,8 +255,7 @@ class SecondActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_update -> {
-                startActivity(Intent(this, PrincipalActivity::class.java))
-                true
+                false
             }
             R.id.action_sign_up -> {
                 mFirestore.collection("TokenUsuario").get().addOnCompleteListener(this) {

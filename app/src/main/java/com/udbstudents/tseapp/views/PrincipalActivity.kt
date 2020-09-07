@@ -81,7 +81,7 @@ class PrincipalActivity : AppCompatActivity() {
         mAuth = FirebaseAuth.getInstance()
         mFirestore = FirebaseFirestore.getInstance()
 
-        spinnerDepartamento = findViewById(R.id.depa_spinner)
+        spinnerDepartamento = findViewById(R.id.spinner)
         getMunicipios()
     }
 
