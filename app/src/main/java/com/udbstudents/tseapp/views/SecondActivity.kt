@@ -115,6 +115,9 @@ class SecondActivity : AppCompatActivity() {
                                          municipioSelected = item.idMunicipio.toString()
                                         getAllActas(municipiosLista, municipioSelected)
                                         listVotosUno.clear()
+                                        listVotosDos.clear()
+                                        listVotosTres.clear()
+                                        listVotosCuatro.clear()
                                     }
                                 }
                             }
