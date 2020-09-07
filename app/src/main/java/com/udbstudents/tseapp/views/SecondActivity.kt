@@ -167,13 +167,13 @@ class SecondActivity : AppCompatActivity() {
     }
 
     private fun getallVostos(
-        listVotosUno: MutableList<Partido>,
-        listVotosDos: MutableList<Partido>,
-        listVotosTres: MutableList<Partido>,
-        listVotosCuatro: MutableList<Partido>
+        listVoUno: MutableList<Partido>,
+        listVoDos: MutableList<Partido>,
+        listVoTres: MutableList<Partido>,
+        listVoCuatro: MutableList<Partido>
     ) {
 
-        for (partido in listVotosUno){
+        for (partido in listVoUno){
             val votoUno =+partido.votos!!
             val sumaVotosUno =  votoUno!!
             val totalvotosUno = sumaVotosUno
