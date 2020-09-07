@@ -160,6 +160,7 @@ class SecondActivity : AppCompatActivity() {
             val sumaVotosUno =+votoUno!!
             val totalvotosUno = sumaVotosUno
 
+
         }
     }
 
