@@ -186,7 +186,7 @@ class SecondActivity : AppCompatActivity() {
                     inflateRecyclerView(listaActasRecyclerView)
                     Log.e("FUNCIONA", "Listado de actas$actasModel")
                 } else {
-                    
+
                         FN.alertProcesses(this, "El municipio seleccionado no posee ninguna acta todavía, intenta con otro")
                         consolidadoCard.visibility = View.INVISIBLE
 
