@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -21,6 +22,7 @@ import com.udbstudents.tseapp.models.ActaAndMunicipio
 import com.udbstudents.tseapp.models.Actas
 import com.udbstudents.tseapp.models.Municipio
 import com.udbstudents.tseapp.models.Partido
+import com.udbstudents.tseapp.utils.FN
 import kotlinx.android.synthetic.main.activity_principal.*
 
 class SecondActivity : AppCompatActivity() {
@@ -42,6 +44,7 @@ class SecondActivity : AppCompatActivity() {
     private lateinit var  editPatidoDosName: TextView
     private lateinit var  editPatidoTresName: TextView
     private lateinit var  editPatidoCuatroName: TextView
+    private lateinit var  consolidadoCard : CardView
 
     private lateinit var  editPatidoUnoTotal: TextView
     private lateinit var  editPatidoDosTotal: TextView
@@ -62,6 +65,7 @@ class SecondActivity : AppCompatActivity() {
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
 
         event_total = findViewById<TextView>(R.id.event_total)
+        consolidadoCard = findViewById(R.id.consolidadoCard)
 
         editPatidoUnoName = findViewById<TextView>(R.id.partidounoitem)
         editPatidoDosName = findViewById<TextView>(R.id.partidoDositem)
@@ -175,6 +179,9 @@ class SecondActivity : AppCompatActivity() {
                                     listVotosCuatro
                                 )
 
+                            }else{
+                                FN.alertProcesses(this, "El municipio seleccionado no posee ninguna acta todavía, intenta con otro")
+                                consolidadoCard.visibility = View.INVISIBLE
                             }
                         }
                     }
