@@ -255,7 +255,7 @@ class SecondActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_update -> {
-
+                startActivity(Intent(this, PrincipalActivity::class.java))
                 true
             }
             R.id.action_sign_up -> {

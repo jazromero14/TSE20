@@ -18,10 +18,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.udbstudents.tseapp.R
 import com.udbstudents.tseapp.adapters.MyAdapter
-import com.udbstudents.tseapp.models.ActaAndMunicipio
-import com.udbstudents.tseapp.models.Actas
-import com.udbstudents.tseapp.models.Municipio
-import com.udbstudents.tseapp.models.Partido
+import com.udbstudents.tseapp.models.*
 import com.udbstudents.tseapp.utils.FN
 import kotlinx.android.synthetic.main.activity_principal.*
 
@@ -32,12 +29,14 @@ class PrincipalActivity : AppCompatActivity() {
     private lateinit var mFirestore: FirebaseFirestore
     private lateinit var mAuth: FirebaseAuth
     private var municipiosLista: MutableList<Municipio> = mutableListOf()
+
+    private var departamentosLista: MutableList<Departamento> = mutableListOf()
     private var listaActasRecyclerView: MutableList<ActaAndMunicipio> = mutableListOf()
     private var listVotosUno : MutableList<Partido> = mutableListOf()
     private var listVotosDos : MutableList<Partido> = mutableListOf()
     private var listVotosTres : MutableList<Partido> = mutableListOf()
     private var listVotosCuatro : MutableList<Partido> = mutableListOf()
-    private lateinit var municipioSelected : String
+    private lateinit var departamentoSelected : String
     private lateinit var actasTotal : String
     private lateinit var event_total: TextView
     private lateinit var  editPatidoUnoName: TextView
@@ -56,7 +55,7 @@ class PrincipalActivity : AppCompatActivity() {
     private var votosTotalCuatro : Int = 0
 
 
-    private lateinit var spinnerMunicipio : Spinner
+    private lateinit var spinnerDepartamento : Spinner
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,26 +81,28 @@ class PrincipalActivity : AppCompatActivity() {
         mAuth = FirebaseAuth.getInstance()
         mFirestore = FirebaseFirestore.getInstance()
 
-        spinnerMunicipio = findViewById(R.id.planets_spinner)
+        spinnerDepartamento = findViewById(R.id.depa_spinner)
         getMunicipios()
     }
 
 
     private fun getMunicipios(){
-        var municipioLis : MutableList<Municipio> = arrayListOf()
-        mFirestore.collection("Municipios").get()
-            .addOnCompleteListener {
-                if (it.isSuccessful) {
-                    val municipio = it.result!!.toObjects(Municipio::class.java)
-                    municipio.forEach { value ->
-                        municipiosLista.add(value)
-                        municipioLis.add(value)
-                    }
-                    ArrayAdapter(this, android.R.layout.simple_spinner_item, municipiosLista).also { adapter ->
-                        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
-                        spinnerMunicipio.adapter = adapter
 
-                        spinnerMunicipio.onItemSelectedListener = object  : AdapterView.OnItemSelectedListener{
+        var departamentLis : MutableList<Departamento> = arrayListOf()
+        var municipioLis : MutableList<Municipio> = arrayListOf()
+        mFirestore.collection("Departamentos").get()
+            .addOnCompleteListener {
+                if (it.isSuccessful){
+                    val departamento = it.result!!.toObjects(Departamento::class.java)
+                    departamento.forEach { value ->
+                        departamentosLista.add(value)
+                        departamentLis.add(value)
+                    }
+                    ArrayAdapter(this, android.R.layout.simple_spinner_item, departamentosLista).also { adapter ->
+                        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
+                        spinnerDepartamento.adapter = adapter
+
+                        spinnerDepartamento.onItemSelectedListener = object  : AdapterView.OnItemSelectedListener{
                             override fun onNothingSelected(parent: AdapterView<*>?) {
                                 TODO("Not yet implemented")
                             }
@@ -114,10 +115,9 @@ class PrincipalActivity : AppCompatActivity() {
                             ) {
                                 val eventCaptured = parent!!.getItemAtPosition(position).toString()
 
-                                for (item in municipiosLista){
+                                for (item in departamentosLista){
                                     if (item.nombre == eventCaptured){
-                                        municipioSelected = item.idMunicipio.toString()
-                                        getAllActas(municipiosLista, municipioSelected)
+                                        departamentoSelected = item.idDeptamento.toString()
                                         listVotosUno.clear()
                                         listVotosDos.clear()
                                         listVotosTres.clear()
@@ -128,6 +128,18 @@ class PrincipalActivity : AppCompatActivity() {
                         }
                     }
                 }
+            }
+        mFirestore.collection("Municipios").get()
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    val municipio = it.result!!.toObjects(Municipio::class.java)
+                    municipio.forEach { value ->
+                        municipiosLista.add(value)
+                        municipioLis.add(value)
+
+                        getAllActas( municipiosLista, departamentosLista, departamentoSelected)
+                    }
+                }
 
 
             }
@@ -135,10 +147,10 @@ class PrincipalActivity : AppCompatActivity() {
     }
 
 
-    private fun getAllActas(municipios: MutableList<Municipio>, idMunicipioSelected: String) {
+    private fun getAllActas(municipios: MutableList<Municipio>,departamentos: MutableList<Departamento>, idDepartamentoSelected: String) {
         listaActasRecyclerView.clear()
 
-        mFirestore.collection("Actas").whereEqualTo("idMunicipio", idMunicipioSelected).get()
+        mFirestore.collection("Actas").whereEqualTo("idDepartamento", idDepartamentoSelected).get()
             .addOnCompleteListener {
                 if (it.isSuccessful) {
                     val actasModel = it.result!!.toObjects(Actas::class.java)
@@ -243,45 +255,7 @@ class PrincipalActivity : AppCompatActivity() {
     }
 
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu, menu)
-        return true
-    }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_update -> {
 
-                true
-            }
-            R.id.action_sign_up -> {
-                mFirestore.collection("TokenUsuario").get().addOnCompleteListener(this) {
-                    if (it.isSuccessful) {
-                        val documents = it.result!!.documents.iterator()
-                        for (idDocument in documents) {
-                            if (idDocument["idUsuario"] == mAuth.currentUser?.uid) {
-                                mFirestore.collection("TokenUsuario").document(idDocument.id)
-                                    .delete()
-                                    .addOnCompleteListener(this) { tokenDelete ->
-                                        if (tokenDelete.isSuccessful) {
-                                            Log.i("TokenDelete", tokenDelete.result.toString())
-                                            mAuth.signOut()
-                                            startActivity(Intent(this, MainActivity::class.java))
-                                            finish()
-                                        }
-                                    }.addOnFailureListener { tokenDeleteError ->
-                                        Log.e("ErrorDelToken", tokenDeleteError.message!!)
-                                        mAuth.signOut()
-                                        startActivity(Intent(this, MainActivity::class.java))
-                                        finish()
-                                    }
-                            }
-                        }
-                    }
-                }
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
+
 }

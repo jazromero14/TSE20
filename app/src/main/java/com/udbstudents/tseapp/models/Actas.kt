@@ -2,6 +2,8 @@ package com.udbstudents.tseapp.models
 
 data class Actas(
     val idMunicipio: String? = null,
+
+    val idDepartamento: String? = null,
     val idPartido_uno: String? = null,
     val idPartido_dos: String? = null,
     val idPartido_tres: String? = null,
