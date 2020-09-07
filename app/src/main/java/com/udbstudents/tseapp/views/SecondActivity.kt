@@ -145,6 +145,7 @@ class SecondActivity : AppCompatActivity() {
                     for (acta in actasModel) {
                         for (municipio in municipios) {
                             if (acta.idMunicipio == municipio.idMunicipio) {
+                                consolidadoCard.visibility = View.VISIBLE
                                 val actaIndex = actasModel.indexOf(acta)
                                 val actaAndMunicipio = ActaAndMunicipio(actaIndex, acta, municipio)
                                 listaActasRecyclerView.add(actaAndMunicipio)
@@ -179,15 +180,16 @@ class SecondActivity : AppCompatActivity() {
                                     listVotosCuatro
                                 )
 
-                            }else{
-                                FN.alertProcesses(this, "El municipio seleccionado no posee ninguna acta todavía, intenta con otro")
-                                consolidadoCard.visibility = View.INVISIBLE
                             }
                         }
                     }
                     inflateRecyclerView(listaActasRecyclerView)
                     Log.e("FUNCIONA", "Listado de actas$actasModel")
                 } else {
+                    
+                        FN.alertProcesses(this, "El municipio seleccionado no posee ninguna acta todavía, intenta con otro")
+                        consolidadoCard.visibility = View.INVISIBLE
+
                     Log.e("NO FUNCIONA", "")
                 }
             }
