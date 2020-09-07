@@ -99,6 +99,7 @@ class SecondActivity : AppCompatActivity() {
                                     if (item.nombre == eventCaptured){
                                          municipioSelected = item.idMunicipio.toString()
                                         getAllActas(municipiosLista, municipioSelected)
+                                        listVotosUno.clear()
                                     }
                                 }
                             }
@@ -114,7 +115,7 @@ class SecondActivity : AppCompatActivity() {
 
     private fun getAllActas(municipios: MutableList<Municipio>, idMunicipioSelected: String) {
         listaActasRecyclerView.clear()
-        listVotosUno.clear()
+
         mFirestore.collection("Actas").whereEqualTo("idMunicipio", idMunicipioSelected).get()
             .addOnCompleteListener {
                 if (it.isSuccessful) {
@@ -179,7 +180,7 @@ class SecondActivity : AppCompatActivity() {
 
 
         }
-        for (partido in listVotosUno) {
+        for (partido in listVoUno) {
 
              precioTotal += partido.votos!!
 
