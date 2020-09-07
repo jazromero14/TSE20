@@ -184,11 +184,15 @@ class SecondActivity : AppCompatActivity() {
                         }
                     }
                     inflateRecyclerView(listaActasRecyclerView)
+
+                    if(listaActasRecyclerView.size == 0) {
+                        FN.alertProcesses(this, "El municipio seleccionado no posee ninguna acta todavía, intenta con otro")
+                        consolidadoCard.visibility = View.INVISIBLE
+                    }
                     Log.e("FUNCIONA", "Listado de actas$actasModel")
                 } else {
 
-                        FN.alertProcesses(this, "El municipio seleccionado no posee ninguna acta todavía, intenta con otro")
-                        consolidadoCard.visibility = View.INVISIBLE
+
 
                     Log.e("NO FUNCIONA", "")
                 }
