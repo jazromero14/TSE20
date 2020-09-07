@@ -42,7 +42,15 @@ class SecondActivity : AppCompatActivity() {
     private lateinit var  editPatidoDosName: TextView
     private lateinit var  editPatidoTresName: TextView
     private lateinit var  editPatidoCuatroName: TextView
-    private var precioTotal : Int = 0
+
+    private lateinit var  editPatidoUnoTotal: TextView
+    private lateinit var  editPatidoDosTotal: TextView
+    private lateinit var  editPatidoTresTotal: TextView
+    private lateinit var  editPatidoCuatroTotal: TextView
+    private var votosTotalUno : Int = 0
+    private var votosTotalDos : Int = 0
+    private var votosTotalTres : Int = 0
+    private var votosTotalCuatro : Int = 0
 
 
     private lateinit var spinnerMunicipio : Spinner
@@ -59,6 +67,13 @@ class SecondActivity : AppCompatActivity() {
         editPatidoDosName = findViewById<TextView>(R.id.partidoDositem)
         editPatidoTresName = findViewById<TextView>(R.id.partidoTresitem)
         editPatidoCuatroName = findViewById<TextView>(R.id.partidoCuatroitem)
+
+
+        editPatidoUnoTotal = findViewById<TextView>(R.id.partidounoName)
+        editPatidoDosTotal = findViewById<TextView>(R.id.partidoDosName)
+        editPatidoTresTotal = findViewById<TextView>(R.id.partidoTresName)
+        editPatidoCuatroTotal = findViewById<TextView>(R.id.partidoCuatroName)
+
         actasTotal = ""
         mAuth = FirebaseAuth.getInstance()
         mFirestore = FirebaseFirestore.getInstance()
@@ -174,12 +189,34 @@ class SecondActivity : AppCompatActivity() {
         listVoTres: MutableList<Partido>,
         listVoCuatro: MutableList<Partido>
     ) {
-        precioTotal = 0
+        votosTotalUno = 0
+        votosTotalDos = 0
+        votosTotalTres = 0
+        votosTotalCuatro = 0
         for (partido in listVoUno) {
-
-             precioTotal += partido.votos!!
+            votosTotalUno += partido.votos!!
         }
-        val totalvotosUno = precioTotal
+        for (partidoDos in listVoDos){
+            votosTotalDos += partidoDos.votos!!
+        }
+
+        for (partidoTres in listVoTres){
+            votosTotalTres += partidoTres.votos!!
+        }
+
+        for (partidoCuatro in listVoCuatro){
+            votosTotalCuatro += partidoCuatro.votos!!
+        }
+
+        val totalvotosUno = votosTotalUno
+        val totalvotosDos = votosTotalDos
+        val totalvotosTres = votosTotalTres
+        val totalvotosCuatro = votosTotalCuatro
+
+        editPatidoUnoTotal.text = totalvotosUno.toString()
+        editPatidoDosTotal.text = totalvotosDos.toString()
+        editPatidoTresTotal.text = totalvotosTres.toString()
+        editPatidoCuatroTotal.text = totalvotosCuatro.toString()
     }
 
     private fun inflateRecyclerView(list: MutableList<ActaAndMunicipio>) {
