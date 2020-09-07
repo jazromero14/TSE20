@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateUI(user: FirebaseUser?) {
         if (user != null) {
-            startActivity(Intent(this, PrincipalActivity::class.java))
+            startActivity(Intent(this, SecondActivity::class.java))
             finish()
         } else {
             Log.i("Error Session", getString(R.string.warning_message))

@@ -5,7 +5,11 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.view.WindowManager
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
@@ -17,6 +21,7 @@ import com.udbstudents.tseapp.models.Actas
 import com.udbstudents.tseapp.models.Municipio
 import com.udbstudents.tseapp.models.TokenUser
 import kotlinx.android.synthetic.main.activity_principal.*
+import java.util.ArrayList
 
 class SecondActivity : AppCompatActivity() {
 
@@ -26,7 +31,9 @@ class SecondActivity : AppCompatActivity() {
     private lateinit var mAuth: FirebaseAuth
     private var municipiosLista: MutableList<Municipio> = mutableListOf()
     private var listaActasRecyclerView: MutableList<ActaAndMunicipio> = mutableListOf()
+    private lateinit var municipioSelected : String
 
+    private lateinit var spinnerMunicipio : Spinner
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,21 +44,58 @@ class SecondActivity : AppCompatActivity() {
         mAuth = FirebaseAuth.getInstance()
         mFirestore = FirebaseFirestore.getInstance()
 
+        spinnerMunicipio = findViewById(R.id.planets_spinner)
+        getMunicipios()
+    }
 
+
+    private fun getMunicipios(){
+        var municipioLis : MutableList<Municipio> = arrayListOf()
         mFirestore.collection("Municipios").get()
             .addOnCompleteListener {
                 if (it.isSuccessful) {
                     val municipio = it.result!!.toObjects(Municipio::class.java)
                     municipio.forEach { value ->
                         municipiosLista.add(value)
+                        municipioLis.add(value)
                     }
-                }
-                getAllActas(municipiosLista)
+                    ArrayAdapter(this, android.R.layout.simple_spinner_item, municipiosLista).also { adapter ->
+                        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line)
+                            spinnerMunicipio.adapter = adapter
+
+                        spinnerMunicipio.onItemSelectedListener = object  : AdapterView.OnItemSelectedListener{
+                            override fun onNothingSelected(parent: AdapterView<*>?) {
+                                TODO("Not yet implemented")
+                            }
+
+                            override fun onItemSelected(
+                                parent: AdapterView<*>?,
+                                view: View?,
+                                position: Int,
+                                id: Long
+                            ) {
+                                val eventCaptured = parent!!.getItemAtPosition(position).toString()
+
+                                for (item in municipiosLista){
+                                    if (item.nombre == eventCaptured){
+                                         municipioSelected = item.idMunicipio.toString()
+                                        getAllActas(municipiosLista, municipioSelected)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    }
+
+
             }
+
     }
 
-    private fun getAllActas(municipios: MutableList<Municipio>) {
-        mFirestore.collection("Actas").get()
+
+    private fun getAllActas(municipios: MutableList<Municipio>, idMunicipioSelected : String) {
+        listaActasRecyclerView.clear()
+        mFirestore.collection("Actas").whereEqualTo("idMunicipio", idMunicipioSelected).get()
             .addOnCompleteListener {
                 if (it.isSuccessful) {
                     val actasModel = it.result!!.toObjects(Actas::class.java)
